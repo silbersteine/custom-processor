@@ -1,0 +1,31 @@
+name: Replace HTML Entities
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  replace-html-entities:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+    
+    - name: Find and Replace HTML Entities
+      run: |
+        for file in $(git diff --name-only HEAD HEAD~ | grep ".html"); do
+          sed -i 's/&lt;/</g' $file
+          git add $file
+        done
+
+    - name: Commit Changes
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git commit -m "Replace HTML Entities [skip ci]"
+    
+    - name: Push Changes
+      uses: ad-m/github-push-action@v0.6.0
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
