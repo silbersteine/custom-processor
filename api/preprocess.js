@@ -3,8 +3,6 @@ export default async function handler(request, response) {
     
     // Get the payload from the request:
     const payload = request.body
-
-
     // Iterate over the keys in the collection:
     for (const [keyId, keyValue] of Object.entries(payload.collection.keys)) {
       // Iterate over the translations in the key:
@@ -14,11 +12,11 @@ export default async function handler(request, response) {
         function unescapeXmlEntities(str) {
             return str.replace(/&([a-zA-Z0-9]+);/g, function(match, entity) {
               switch (entity) {
-                case 'gt;':
+                case 'gt':
                   return '>';
-                case 'lt;':
+                case 'lt':
                   return '<';
-                case 'amp;':
+                case 'amp':
                   return '&';
                 // Add more cases for other escaped entities if needed
                 default:
@@ -26,8 +24,9 @@ export default async function handler(request, response) {
               }
             });
           }
+          
+          payload.collection.keys[keyId].translations[lang].translation = unescapeXmlEntities(v.translation);
       }
     }
-
     response.send(payload);
 }
