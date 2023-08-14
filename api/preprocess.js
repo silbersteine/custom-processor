@@ -1,6 +1,4 @@
-export default async function handler(request, response) {
-    const webhookData = request.body;
-    
+export default async function handler(request, response) {    
     // Get the payload from the request:
     const payload = request.body
     // Iterate over the keys in the collection:
