@@ -11,7 +11,23 @@ export default async function handler(request, response) {
       for (const [lang, v] of Object.entries(keyValue.translations)) {
         
         // Process the value of the translation:
-        payload.collection.keys[keyId].translations[lang].translation = v.translation.replace(/\s/g, '')
+        function unescapeXmlEntities(str) {
+            return str.replace(/&([a-zA-Z0-9]+);/g, function(match, entity) {
+              switch (entity) {
+                case 'gt':
+                  return '>';
+                case 'lt':
+                  return '<';
+                case 'amp':
+                  return '&';
+                // Add more cases for other escaped entities if needed
+                default:
+                  return match; // Return the original match if the entity is not recognized
+              }
+            });
+          }
+          
+          payload.collection.keys[keyId].translations[lang].translation = unescapeXmlEntities(v.translation);
       }
     }
 
