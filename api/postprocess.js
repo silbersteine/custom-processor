@@ -6,14 +6,9 @@ export default async function handler(request, response) {
       // Iterate over the translations in the key:
       for (const [lang, v] of Object.entries(keyValue.translations)) {
          // If key contains warning add '⚠️' prefix
-         if (payload.collection.keys[keyId].key.includes('warning!!!')) {
+         if (payload.collection.keys[keyId].key.includes('warning')) {
             payload.collection.keys[keyId].translations[lang].translation = '⚠️' + v.translation;
          } 
-         payload.collection.keys[keyId].translations[lang].translation = payload.collection.keys[keyId].translations[lang].translation
-         .replace(/&lt;/g, '<')
-         .replace(/&gt;/g, '>')
-         .replace(/&amp;/g, '&');
-
       }
     }
 
