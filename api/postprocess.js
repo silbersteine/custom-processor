@@ -9,6 +9,11 @@ export default async function handler(request, response) {
          if (payload.collection.keys[keyId].key.includes('warning')) {
             payload.collection.keys[keyId].translations[lang].translation = '⚠️' + v.translation;
          } 
+         payload.collection.keys[keyId].translations[lang].translation = payload.collection.keys[keyId].translations[lang].translation
+         .replace(/&lt;/g, '<')
+         .replace(/&gt;/g, '>')
+         .replace(/&amp;/g, '&');
+
       }
     }
 
