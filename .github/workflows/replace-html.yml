@@ -30,10 +30,9 @@ jobs:
         done
 
     - name: Commit and push changes
-      env: ${{ github.token }}
       run: |
-        git config --global user.name "${GITHUB_ACTOR}"
-        git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
+        git config --global user.email "actions@github.com"
+        git config --global user.name "GitHub Action"
         git add .
         git commit -am "Find and replace HTML entities"
         git push
