@@ -11,10 +11,7 @@ export default async function handler(request, response) {
       for (const [lang, v] of Object.entries(keyValue.translations)) {
         
         // Process the value of the translation:
-        payload.collection.keys[keyId].translations[lang].translation = v.translation.replace(
-          ' ',
-          '',
-        )
+        payload.collection.keys[keyId].translations[lang].translation = v.translation.replace(/\s/g, '')
       }
     }
 
