@@ -1,4 +1,4 @@
-name: Replace HTML Entities
+name: Find and Replace HTML Action
 
 on:
   push:
@@ -6,26 +6,32 @@ on:
       - main
 
 jobs:
-  replace-html-entities:
+  html_find_replace:
     runs-on: ubuntu-latest
+    
     steps:
-    - name: Checkout Repository
+    - name: Checkout code
       uses: actions/checkout@v2
     
-    - name: Find and Replace HTML Entities
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
+    
+    - name: Install dependencies
       run: |
-        for file in $(git diff --name-only HEAD HEAD~ | grep ".html"); do
-          sed -i 's/&lt;/</g' $file
-          git add $file
+        python -m pip install --upgrade pip
+        pip install regex
+    
+    - name: Find and Replace HTML
+      run: |
+        find . -type f -name '*.html' | while read -r file; do
+          sed -i -e 's/&lt;/</g' "${file}"
         done
 
-    - name: Commit Changes
+    - name: Commit and push changes
       run: |
-        git config --local user.email "action@github.com"
-        git config --local user.name "GitHub Action"
-        git commit -m "Replace HTML Entities [skip ci]"
-    
-    - name: Push Changes
-      uses: ad-m/github-push-action@v0.6.0
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
+        git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
+        git config --global user.name "${GITHUB_ACTOR}"
+        git commit -m "Find and replace HTML entities"
+        git push origin main
