@@ -13,7 +13,7 @@ export default async function handler(request, response) {
         // Process the value of the translation:
         payload.collection.keys[keyId].translations[lang].translation = v.translation.replace(
           '⚠️',
-          '',
+          'warning!',
         )
       }
     }
