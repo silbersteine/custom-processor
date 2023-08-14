@@ -14,11 +14,11 @@ export default async function handler(request, response) {
         function unescapeXmlEntities(str) {
             return str.replace(/&([a-zA-Z0-9]+);/g, function(match, entity) {
               switch (entity) {
-                case 'gt':
+                case 'gt;':
                   return '>';
-                case 'lt':
+                case 'lt;':
                   return '<';
-                case 'amp':
+                case 'amp;':
                   return '&';
                 // Add more cases for other escaped entities if needed
                 default:
