@@ -33,5 +33,6 @@ jobs:
       run: |
         git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
         git config --global user.name "${GITHUB_ACTOR}"
-        git commit -m "Find and replace HTML entities"
+        git add .
+        git commit -am "Find and replace HTML entities
         git push origin main
