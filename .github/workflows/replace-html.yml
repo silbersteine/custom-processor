@@ -26,7 +26,7 @@ jobs:
     - name: Find and Replace HTML
       run: |
         find ./forPostProcessing -type f -name '*.html' | while read -r file; do
-          sed -i -e 's/&lt;/</g' -e 's/&gt;/>/g' -e 's/&amp;/&/g' "${file}"
+          sed -i -e 's/&lt;/</g' -e 's/&gt;/>/g' -e 's/\&amp;/&/g' "${file}"
         done
 
     - name: Commit and push changes
