@@ -31,9 +31,13 @@ jobs:
     - name: Copy modified files to translatedHTML
       run: |
         IFS=$'\n' read -rd '' -a files <<< "${{ steps.modified_files.outputs.files }}"
-        for file in "${files[@]}"; do
-          cp "./forPostProcessing/${file}" "./translatedHTML/${file}"
-        done
+        if [ "${#files[@]}" -eq 0 ]; then
+          echo "No files to copy."
+        else
+          for file in "${files[@]}"; do
+            cp "./forPostProcessing/${file}" "./translatedHTML/${file}"
+          done
+        fi
     
     - name: Find and Replace HTML
       run: |
