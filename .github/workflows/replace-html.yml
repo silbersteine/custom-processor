@@ -23,21 +23,9 @@ jobs:
         python -m pip install --upgrade pip
         pip install regex
     
-    - name: Determine modified files
-      id: modified_files
-      run: |
-        echo "::set-output name=files::$(git diff --name-only HEAD HEAD~1)"
-
     - name: Copy modified files to translatedHTML
       run: |
-        IFS=$'\n' read -rd '' -a files <<< "${{ steps.modified_files.outputs.files }}"
-        if [ "${#files[@]}" -eq 0 ]; then
-          echo "No files to copy."
-        else
-          for file in "${files[@]}"; do
-            cp "./forPostProcessing/${file}" "./translatedHTML/${file}"
-          done
-        fi
+        git diff --name-only HEAD HEAD~1 | grep "^forPostProcessing/" | xargs -I {} cp {} translatedHTML/
     
     - name: Find and Replace HTML
       run: |
