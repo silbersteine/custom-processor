@@ -25,7 +25,7 @@ jobs:
     
     - name: Find and Replace HTML
       run: |
-        find ./forPostProcessing -type f -name '*.html' | while read -r file; do
+        git diff --name-only --diff-filter=d | grep '^forPostProcessing/.*\.html$' | while read -r file; do
           sed -i -e 's/&lt;/</g' -e 's/&gt;/>/g' -e 's/\&amp;/&/g' "${file}"
         done
 
