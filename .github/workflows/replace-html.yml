@@ -1,38 +1,38 @@
-# name: Find and Replace HTML Action
+name: Find and Replace HTML Action
 
-# on:
-#   push:
-#     branches:
-#       - main
+on:
+  push:
+    branches:
+      - main
 
-# jobs:
-#   html_find_replace:
-#     runs-on: ubuntu-latest
+jobs:
+  html_find_replace:
+    runs-on: ubuntu-latest
     
-#     steps:
-#     - name: Checkout code
-#       uses: actions/checkout@v2
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
     
-#     - name: Set up Python
-#       uses: actions/setup-python@v2
-#       with:
-#         python-version: '3.x'
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
     
-#     - name: Install dependencies
-#       run: |
-#         python -m pip install --upgrade pip
-#         pip install regex
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install regex
     
-#     - name: Find and Replace HTML
-#       run: |
-#         find . -type f -name '*.html' | while read -r file; do
-#           sed -i -e 's/&lt;/</g' "${file}"
-#         done
+    - name: Find and Replace HTML
+      run: |
+        find . -type f -name '*.html' | while read -r file; do
+          sed -i -e 's/&lt;/</g' "${file}"
+        done
 
-#     - name: Commit and push changes
-#       run: |
-#         git config --global user.email "actions@github.com"
-#         git config --global user.name "GitHub Action"
-#         git add .
-#         git commit -am "Find and replace HTML entities"
-#         git push
+    - name: Commit and push changes
+      run: |
+        git config --global user.email "actions@github.com"
+        git config --global user.name "GitHub Action"
+        git add .
+        git commit -am "Find and replace HTML entities"
+        git push
