@@ -23,14 +23,10 @@ jobs:
         python -m pip install --upgrade pip
         pip install regex
     
-    - name: Copy modified files to translatedHTML
-      run: |
-        git diff --name-only HEAD HEAD~1 | grep "^forPostProcessing/" | xargs -I {} cp {} translatedHTML/
-    
     - name: Find and Replace HTML
       run: |
-        git diff --name-only --diff-filter=AMR --relative="./translatedHTML" '*.html' | while read -r file; do
-          perl -p -i -e 's/&lt;/</g; s/&gt;/>/g; s/&amp;/\&/g' "${file}"
+        find ./forPostProcessing -type f -name '*.html' | while read -r file; do
+          sed -i -e 's/&lt;/</g' -e 's/&gt;/>/g' -e 's/\&amp;/&/g' "${file}"
         done
 
     - name: Commit and push changes
