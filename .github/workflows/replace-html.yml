@@ -25,7 +25,7 @@ jobs:
     
     - name: Find and Replace HTML
       run: |
-        find . -type f -name '*.html' | while read -r file; do
+        find ./forPostProcessing -type f -name '*.html' | while read -r file; do
           sed -i -e 's/&lt;/</g' "${file}"
         done
 
@@ -33,6 +33,6 @@ jobs:
       run: |
         git config --global user.email "actions@github.com"
         git config --global user.name "GitHub Action"
-        git add .
+        git add ./translatedHTML
         git commit -am "Find and replace HTML entities"
         git push
