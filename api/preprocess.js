@@ -3,11 +3,11 @@ function unescapeXmlEntities(str) {
     console.log('Match is ', match)
     console.log('Entity is ', entity)
     switch (entity) {
-      case '&gt;':
+      case '&gt':
         return '>';
-      case '&lt;':
+      case 'lt':
         return '<';
-      case '&amp;':
+      case '&amp':
         return '&';
       // Add more cases for other escaped entities if needed
       default:
