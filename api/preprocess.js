@@ -1,5 +1,7 @@
 function unescapeXmlEntities(str) {
   return str.replace(/&([a-zA-Z0-9]+);/g, function(match, entity) {
+    console.log('Match is ', match)
+    console.log('Entity is ', entity)
     switch (entity) {
       case '&gt;':
         return '>';
