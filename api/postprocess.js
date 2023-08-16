@@ -4,10 +4,10 @@ export default async function handler(request, response) {
     for (const [keyId, keyValue] of Object.entries(payload.collection.keys)) {
       // Iterate over the translations in the key:
       for (const [lang, v] of Object.entries(keyValue.translations)) {
-        payload.collection.keys[keyId].translations[lang].translation = payload.collection.keys[keyId].translations[lang].translation
-          .replace(/</g, '&lt;')
-          .replace(/>/g, '&gt;')
-          .replace(/&/g, '&amp;');
+         payload.collection.keys[keyId].translations[lang].translation = payload.collection.keys[keyId].translations[lang].translation
+         .replace(/&lt;/g, '<')
+         .replace(/&gt;/g, '>')
+         .replace(/&amp;/g, '&');
       }
     }
     response.send(payload);
