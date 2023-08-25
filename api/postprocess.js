@@ -5,10 +5,9 @@ export default async function handler(request, response) {
       // Iterate over the translations in the key:
       for (const [lang, v] of Object.entries(keyValue.translations)) {
          payload.collection.keys[keyId].translations[lang].translation = payload.collection.keys[keyId].translations[lang].translation
+         .replace(/&/g, '&amp;')
          .replace(/</g, '&lt;')
-         .replace(/>/g, '&gt;')
-         .replace(/&/g, '&amp;');
-         
+         .replace(/>/g, '&gt;');       
       }
     }
     response.send(payload);
