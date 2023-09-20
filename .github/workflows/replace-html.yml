@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - main
+    paths:
+      - 'forPostProcessing/**'
 
 jobs:
   html_find_replace:
