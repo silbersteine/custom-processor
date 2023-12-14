@@ -7,8 +7,9 @@ function unescapeXmlEntities(str) {
         return '>';
       case 'lt':
         return '<';
-      case 'amp':
+      case '&amp':
         return '&';
+      
       // Add more cases for other escaped entities if needed
       default:
         return match; // Return the original match if the entity is not recognized
