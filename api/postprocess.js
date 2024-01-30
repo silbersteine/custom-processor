@@ -6,7 +6,7 @@ async function handler(request, response) {
     for (const [lang, v] of Object.entries(keyValue.translations)) {
       payload.collection.keys[keyId].translations[lang].translation = payload.collection.keys[keyId].translations[lang].translation
         //.replace(/</g, '&lt;')
-        .replace(/(<string>)li(<\/string>)/g, '$1%@$2')
+        .replace(/li/g, '$1%@$2')
     }
   }
   response.send(payload);
